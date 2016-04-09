@@ -4,7 +4,10 @@ var multer = require('multer');
 var fs = require('fs');
 var app = express();
 
+var bodyParser = require('body-parser');
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 var EVENTS_FILE = path.join(__dirname, 'events.json');
 app.use('/', express.static(path.join(__dirname, 'public')));
@@ -20,7 +23,8 @@ var storage = multer.diskStorage({
 var upload = multer({dest: './public/uploads/', storage: storage});
 
 app.post('/register', function (req, res) {
-      console.log(req);
+      console.log(req.body);	
+      res.send("ok");
 });
 
 app.post('/create/event', function(req, res) {
@@ -65,6 +69,6 @@ app.get('/api/events', function(req,res) {
 	});
 });
 
-app.listen(3000, function () {
-	console.log("Example app listenin on port 3000!");
+app.listen(3456, function () {
+	console.log("Example app listenin on port 3456!");
 });
