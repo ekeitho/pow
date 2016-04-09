@@ -79,7 +79,7 @@ var EventList = React.createClass({
 	render: function() {
 		var eventNodes = this.props.data.map(function(event) {
 			return (
-			<Event desc={event.desc} date={event.date} title={event.title} image={event.image}>
+			<Event key={event.id} desc={event.desc} date={event.date} title={event.title} image={event.image}>
 				/* add text and image */
 			</Event>
 			);
