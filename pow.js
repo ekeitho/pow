@@ -3,7 +3,7 @@ var path = require('path')
 var multer = require('multer');
 var fs = require('fs');
 var app = express();
-
+var gcm = require('node-gcm');
 var bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
@@ -22,10 +22,32 @@ var storage = multer.diskStorage({
    });
 var upload = multer({dest: './public/uploads/', storage: storage});
 
+var added = [];
+
 app.post('/register', function (req, res) {
       console.log(req.body);	
+	added.push(req.body.token);
+	//youd update the database here
       res.send("ok");
 });
+
+setInterval(go, 7000);
+
+function go (){
+	if (added.length > 0) {
+		var message = new gcm.Message();
+		message.addNotification({title: "Allert!!", body: "Abnormal data access", icon: "ic_launcher"});
+		var regTokens = [added[0]];
+		var sender = new gcm.Sender('AIzaSyA8eU2cAheiLotUZpHcH8AUIhBJS8wdEvw');
+		sender.send(message, {registrationTokens: regTokens}, function (err, res) {
+			if (err) {
+				console.log(err);
+			} else {
+				console.log(res);
+			}
+		});	
+	}
+}
 
 app.post('/create/event', function(req, res) {
 
