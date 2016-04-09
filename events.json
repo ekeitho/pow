@@ -1,3 +1,25 @@
+/*
+   {
+      'id': 0,
+      'name': 'hello',
+      'age': 21,
+      'current_location': {long: 102, lat: 103},
+      'default_location':"Some address location",
+      'groups': {
+         'bobsburger':[3, 4, 5],
+         'whatsups':[4,5]
+      },
+      history:[
+               {who:[3,4,5],
+                when:TIMESTAMP,
+                where:ID_of_PLACE},
+                {who:[5,3,2],
+                when:TIMESTAMP,
+                where:ID_of_PLACE}
+              ]
+   }
+
+
 [
     {
         "title": "Hackathon (3rd Annual)",

@@ -5,6 +5,7 @@ var fs = require('fs');
 var app = express();
 
 
+
 var EVENTS_FILE = path.join(__dirname, 'events.json');
 app.use('/', express.static(path.join(__dirname, 'public')));
 
@@ -18,10 +19,18 @@ var storage = multer.diskStorage({
    });
 var upload = multer({dest: './public/uploads/', storage: storage});
 
-app.post('/api/events', upload.single('image'), function(req,res) {	
+app.post('/register', function (req, res) {
+      console.log(req);
+});
+
+app.post('/create/event', function(req, res) {
+
+});
+
+app.post('/api/events', upload.single('image'), function(req,res) {
 	console.log(req.file);
 	console.log(req.body);
-	
+
 	fs.readFile(EVENTS_FILE, function(err, data) {
 		if (err) {
 			console.error(err);
@@ -44,7 +53,6 @@ app.post('/api/events', upload.single('image'), function(req,res) {
 			res.json(events);
 		});
 	});
-
 });
 
 app.get('/api/events', function(req,res) {
