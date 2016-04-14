@@ -57,6 +57,6 @@ app.get('/api/events', function(req,res) {
 	});
 });
 
-app.listen(3000, function () {
-	console.log("Example app listenin on port 3000!");
+app.listen(3456, function () {
+	console.log("Example app listenin on port 3456!");
 });
