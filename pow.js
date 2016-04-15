@@ -13,7 +13,7 @@ var storage = multer.diskStorage({
 		 cb(null, './public/uploads/')
      },
      filename: function (req, file, cb) {
-		 cb(null, file.originalname + '-' + Date.now())
+		 cb(null, file.originalname.replace(" ", ""))
 		}
    });
 var upload = multer({dest: './public/uploads/', storage: storage});
@@ -28,8 +28,12 @@ app.post('/api/events', upload.single('image'), function(req,res) {
 			process.exit(1);
 		}
 		var events = JSON.parse(data);
+		var nextId = events[events.length - 1].id;
+		if (nextId == null) {
+			nextId = -1;
+		}
 		var newEvent = {
-			id: Date.now(),
+			id: nextId + 1,
 			desc: req.body.desc,
 			title: req.body.title,
 			date: req.body.date,
